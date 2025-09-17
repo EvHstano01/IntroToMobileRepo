@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileAppProject.Views.RecipeDetailPage"
+             Title="{Binding Recipe.Title}"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDark}}">
+    <ScrollView>
+        <VerticalStackLayout Padding="12" Spacing="12" 
+                         BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDark}}">
+
+            <!-- Title and Toggle Button Row -->
+            <Grid ColumnDefinitions="*,Auto" Padding="0,0,0,8">
+                <Label Text="Go Back"   
+                   FontAttributes="Bold"
+                   FontSize="18"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Start"
+                   TextColor="{AppThemeBinding Light={StaticResource TextPrimary}, Dark={StaticResource White}}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnBackClicked"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Button Text="Toggle Theme"
+                    Clicked="OnToggleThemeClicked"
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"
+                    Grid.Column="1"/>
+            </Grid>
+
+            <Image Source="{Binding Recipe.ImageFile}" Aspect="AspectFill" HeightRequest="200"/>
+            <Label Text="{Binding Recipe.Title}" FontSize="22" FontAttributes="Bold"/>
+            <Label Text="{Binding Recipe.ShortDescription}" />
+
+            <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto">
+                <Label Text="Prep" FontAttributes="Bold" Grid.Column="0" Grid.Row="0"/>
+                <Label Text="Cook" FontAttributes="Bold" Grid.Column="1" Grid.Row="0"/>
+                <Label Text="Total" FontAttributes="Bold" Grid.Column="2" Grid.Row="0"/>
+
+                <Label Text="{Binding Recipe.PrepMinutes, StringFormat='{0} min'}" Grid.Column="0" Grid.Row="1"/>
+                <Label Text="{Binding Recipe.CookMinutes, StringFormat='{0} min'}" Grid.Column="1" Grid.Row="1"/>
+                <Label Text="{Binding Recipe.TotalMinutes, StringFormat='{0} min'}" Grid.Column="2" Grid.Row="1"/>
+            </Grid>
+
+            <Label Text="Ingredients" FontAttributes="Bold" FontSize="18"/>
+            <CollectionView ItemsSource="{Binding Recipe.Ingredients}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding ., StringFormat='• {0}'}"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="Instructions" FontAttributes="Bold" FontSize="18"/>
+            <Label Text="{Binding Recipe.Instructions}" LineBreakMode="WordWrap"/>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

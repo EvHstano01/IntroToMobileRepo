@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MobileAppProject.Models"
+             x:Class="MobileAppProject.Views.RecipeListPage"
+             Title="Recipes"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDark}}">
+    <ScrollView>
+        <VerticalStackLayout Padding="15" Spacing="12" >
+            <!-- Title and Toggle Button Row -->
+            <Grid>
+                <Image Source="header.png"
+                   Aspect="AspectFill"
+                   HeightRequest="120"/>
+                <Grid ColumnDefinitions="*,Auto" Padding="0,0,0,8">
+                    <Label Text="Fall Recipes"   
+                       FontAttributes="Bold"
+                       FontSize="28"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start"
+                       Margin="15,0,0,0"
+                       TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}">
+                        <Label.Shadow>
+                        <Shadow Brush="Black" 
+                            Offset="1,1" 
+                            Radius="2" />
+                        </Label.Shadow>
+                    </Label>
+
+                    <Button Text="Toggle Theme"
+                    Clicked="OnToggleThemeClicked"
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"
+                    Grid.Column="1"
+                    Margin="0 15 0 0"/>
+                </Grid>
+            </Grid>
+            <!-- Recipe List -->
+        <CollectionView ItemsSource="{Binding Recipes}"
+                        SelectionMode="Single"
+                        SelectionChanged="CollectionView_SelectionChanged">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="1"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Recipe">
+                    <Border Margin="6" StrokeShape="RoundRectangle 12" Padding="8" BackgroundColor="{AppThemeBinding Light={StaticResource SoftYellow}, Dark={StaticResource AccentOrange}}">
+                        <Grid ColumnDefinitions="100, *">
+                            <Image Source="{Binding ImageFile}" Aspect="AspectFill" HeightRequest="80" WidthRequest="100"/>
+                            <StackLayout Grid.Column="1" Padding="8,0" VerticalOptions="Center">
+                                <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="16"/>
+                                <Label Text="{Binding ShortDescription}" LineBreakMode="TailTruncation" MaxLines="2"/>
+                            </StackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -33,7 +33,7 @@
                     VerticalOptions="Center"
                     HorizontalOptions="End"
                     Grid.Column="1"
-                    Margin="0 15 0 0"/>
+                    Margin="0,15,0,0"/>
                 </Grid>
             </Grid>
             <!-- Recipe List -->

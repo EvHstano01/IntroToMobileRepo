@@ -23,7 +23,6 @@ public static class MauiProgram
         builder.Services.AddTransient<RecipeDetailViewModel>();
         builder.Services.AddTransient<RecipeDetailViewModel>();
 
-        Routing.RegisterRoute("recipedetail", typeof(RecipeDetailPage));
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

@@ -17,7 +17,7 @@ namespace MobileAppProject.ViewModels
         private readonly IRecipeService _service;
 
         [ObservableProperty]
-        private ObservableCollection<Recipe> recipes = new();
+        private ObservableCollection<RecipeItem> recipes = new();
 
         [ObservableProperty]
         private bool isBusy;
@@ -35,13 +35,13 @@ namespace MobileAppProject.ViewModels
             {
                 IsBusy = true;
                 var items = await _service.GetAllRecipesAsync();
-                Recipes = new ObservableCollection<Recipe>(items);
+                Recipes = new ObservableCollection<RecipeItem>(items);
             }
             finally { IsBusy = false; }
         }
 
         [RelayCommand]
-        public async Task SelectRecipeAsync(Recipe recipe)
+        public async Task SelectRecipeAsync(RecipeItem recipe)
         {
             if (recipe == null) return;
             // pass id

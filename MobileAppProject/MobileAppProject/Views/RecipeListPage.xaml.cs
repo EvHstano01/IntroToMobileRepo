@@ -24,7 +24,7 @@ public partial class RecipeListPage : ContentPage
 
     void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        var recipe = e.CurrentSelection.FirstOrDefault() as Recipe;
+        var recipe = e.CurrentSelection.FirstOrDefault() as RecipeItem;
         if (recipe != null)
         {
             ViewModel.SelectRecipeCommand.Execute(recipe);

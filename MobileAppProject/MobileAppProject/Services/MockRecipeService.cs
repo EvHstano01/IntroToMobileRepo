@@ -8,9 +8,10 @@ namespace MobileAppProject.Services
 {
     public class MockRecipeService : IRecipeService
     {
-        private readonly List<Recipe> _recipes = new()
+        // Hardcoded list of recipes until a recipe service and functionality is implemented
+        private readonly List<RecipeItem> _recipes = new()
         {
-            new Recipe
+            new RecipeItem
             {
                 Id = "r1",
                 Title = "Spaghetti with Meat Sauce",
@@ -39,7 +40,7 @@ namespace MobileAppProject.Services
                 PrepMinutes = 10,
                 CookMinutes = 25
             },
-            new Recipe
+            new RecipeItem
             {
                 Id = "r2",
                 Title = "Roast Chicken with Potatoes",
@@ -65,7 +66,7 @@ namespace MobileAppProject.Services
                 PrepMinutes = 15,
                 CookMinutes = 90
             },
-            new Recipe
+            new RecipeItem
             {
                 Id = "r3",
                 Title = "Beef Stew",
@@ -93,7 +94,7 @@ namespace MobileAppProject.Services
                 PrepMinutes = 15,
                 CookMinutes = 120
             },
-            new Recipe
+            new RecipeItem
             {
                 Id = "r4",
                 Title = "Mac and Cheese",
@@ -118,7 +119,7 @@ namespace MobileAppProject.Services
                 PrepMinutes = 10,
                 CookMinutes = 15
             },
-            new Recipe
+            new RecipeItem
             {
                 Id = "r5",
                 Title = "Mashed Potatoes",
@@ -139,7 +140,7 @@ namespace MobileAppProject.Services
                 PrepMinutes = 10,
                 CookMinutes = 20
             },
-            new Recipe
+            new RecipeItem
             {
                 Id = "r6",
                 Title = "Pumpkin Pie",
@@ -167,7 +168,7 @@ namespace MobileAppProject.Services
                 PrepMinutes = 15,
                 CookMinutes = 55
             },
-            new Recipe
+            new RecipeItem
             {
                 Id = "r7",
                 Title = "Apple Pie",
@@ -196,10 +197,10 @@ namespace MobileAppProject.Services
             }
         };
 
-        public Task<IEnumerable<Recipe>> GetAllRecipesAsync() =>
+        public Task<IEnumerable<RecipeItem>> GetAllRecipesAsync() =>
             Task.FromResult(_recipes.AsEnumerable());
 
-        public Task<Recipe?> GetRecipeByIdAsync(string id) =>
+        public Task<RecipeItem?> GetRecipeByIdAsync(string id) =>
             Task.FromResult(_recipes.FirstOrDefault(r => r.Id == id));
     }
 }

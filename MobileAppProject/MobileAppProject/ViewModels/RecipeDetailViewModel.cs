@@ -16,7 +16,7 @@ namespace MobileAppProject.ViewModels
         private readonly IRecipeService _service;
 
         [ObservableProperty]
-        private Recipe recipe;
+        private RecipeItem recipe;
 
         [ObservableProperty]
         private bool isBusy;

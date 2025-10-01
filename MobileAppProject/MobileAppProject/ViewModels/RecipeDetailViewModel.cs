@@ -1,19 +1,16 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using MobileAppProject.Models;
 using MobileAppProject.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MobileAppProject.ViewModels
 {
     [QueryProperty(nameof(RecipeId), "recipeId")]
-    [QueryProperty(nameof(RecipeId), "recipeId")]
     public partial class RecipeDetailViewModel : ObservableObject
     {
         private readonly IRecipeService _service;
+
+        [ObservableProperty]
+        private int recipeId;
 
         [ObservableProperty]
         private RecipeItem recipe;
@@ -26,27 +23,24 @@ namespace MobileAppProject.ViewModels
             _service = service;
         }
 
-        string? recipeId;
-        public string? RecipeId
+        // This method is called automatically when RecipeId changes due to the [QueryProperty] attribute
+        partial void OnRecipeIdChanged(int value)
         {
-            get => recipeId;
-            set
-            {
-                SetProperty(ref recipeId, value);
-                // trigger loading when set
-                _ = LoadRecipeAsync(value);
-            }
+            _ = LoadRecipeAsync(value);
         }
 
-        public async Task LoadRecipeAsync(string id)
+        public async Task LoadRecipeAsync(int id)
         {
-            if (string.IsNullOrEmpty(id)) return;
+            if (IsBusy) return;
             try
             {
                 IsBusy = true;
                 Recipe = await _service.GetRecipeByIdAsync(id);
             }
-            finally { IsBusy = false; }
+            finally
+            {
+                IsBusy = false;
+            }
         }
     }
 }

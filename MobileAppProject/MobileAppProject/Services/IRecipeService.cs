@@ -1,17 +1,11 @@
 ﻿using MobileAppProject.Models;
-using Refit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MobileAppProject.Services
 {
     public interface IRecipeService
     {
         Task<IEnumerable<RecipeItem>> GetAllRecipesAsync();
-        Task<RecipeItem?> GetRecipeByIdAsync(string id);
+        Task<RecipeItem?> GetRecipeByIdAsync(int id);
         // future add: Task Add/Update/Delete...
 
         //public async Task AddRecipeAsync(RecipeItem recipe)

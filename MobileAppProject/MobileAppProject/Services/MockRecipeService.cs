@@ -13,7 +13,7 @@ namespace MobileAppProject.Services
         {
             new RecipeItem
             {
-                Id = "r1",
+                Id = 1,
                 Title = "Spaghetti with Meat Sauce",
                 ShortDescription = "Classic spaghetti with a rich beef tomato sauce",
                 ImageFile = "spaghetti.jpg",
@@ -42,7 +42,7 @@ namespace MobileAppProject.Services
             },
             new RecipeItem
             {
-                Id = "r2",
+                Id = 2,
                 Title = "Roast Chicken with Potatoes",
                 ShortDescription = "Juicy roast chicken with roasted potatoes",
                 ImageFile = "roastchicken.jpg",
@@ -68,7 +68,7 @@ namespace MobileAppProject.Services
             },
             new RecipeItem
             {
-                Id = "r3",
+                Id = 3,
                 Title = "Beef Stew",
                 ShortDescription = "Hearty beef stew with vegetables",
                 ImageFile = "beefstew.jpg",
@@ -96,7 +96,7 @@ namespace MobileAppProject.Services
             },
             new RecipeItem
             {
-                Id = "r4",
+                Id = 4,
                 Title = "Mac and Cheese",
                 ShortDescription = "Classic creamy macaroni and cheese",
                 ImageFile = "maccheese.jpg",
@@ -121,7 +121,7 @@ namespace MobileAppProject.Services
             },
             new RecipeItem
             {
-                Id = "r5",
+                Id = 5,
                 Title = "Mashed Potatoes",
                 ShortDescription = "Creamy, buttery mashed potatoes",
                 ImageFile = "mashtater.jpg",
@@ -142,7 +142,7 @@ namespace MobileAppProject.Services
             },
             new RecipeItem
             {
-                Id = "r6",
+                Id = 6,
                 Title = "Pumpkin Pie",
                 ShortDescription = "Classic pumpkin pie with warm spices",
                 ImageFile = "pumpkinpie.jpg",
@@ -170,7 +170,7 @@ namespace MobileAppProject.Services
             },
             new RecipeItem
             {
-                Id = "r7",
+                Id = 7,
                 Title = "Apple Pie",
                 ShortDescription = "Classic apple pie with flaky crust",
                 ImageFile = "applepie.jpg",
@@ -200,7 +200,7 @@ namespace MobileAppProject.Services
         public Task<IEnumerable<RecipeItem>> GetAllRecipesAsync() =>
             Task.FromResult(_recipes.AsEnumerable());
 
-        public Task<RecipeItem?> GetRecipeByIdAsync(string id) =>
+        public Task<RecipeItem?> GetRecipeByIdAsync(int id) =>
             Task.FromResult(_recipes.FirstOrDefault(r => r.Id == id));
     }
 }

@@ -8,7 +8,7 @@ namespace MobileAppProject
         {
             InitializeComponent();
 
-            Routing.RegisterRoute("recipedetail", typeof(RecipeDetailPage));
+            Routing.RegisterRoute(nameof(RecipeDetailPage), typeof(RecipeDetailPage));
         }
     }
 }

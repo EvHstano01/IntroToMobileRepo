@@ -1,14 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MobileAppProject.Models;
 using MobileAppProject.Services;
-using System;
-using System.Collections.Generic;
+using MobileAppProject.Models;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
+using MobileAppProject.Views;
 
 namespace MobileAppProject.ViewModels
 {
@@ -18,6 +14,9 @@ namespace MobileAppProject.ViewModels
 
         [ObservableProperty]
         private ObservableCollection<RecipeItem> recipes = new();
+
+        [ObservableProperty]
+        private ObservableCollection<RecipeItem> favourites = new();
 
         [ObservableProperty]
         private bool isBusy;
@@ -31,6 +30,7 @@ namespace MobileAppProject.ViewModels
         public async Task LoadRecipesAsync()
         {
             if (IsBusy) return;
+
             try
             {
                 IsBusy = true;
@@ -41,11 +41,29 @@ namespace MobileAppProject.ViewModels
         }
 
         [RelayCommand]
-        public async Task SelectRecipeAsync(RecipeItem recipe)
+        public async Task SelectRecipe(RecipeItem? recipe)
+        {
+            if (recipe?.Id == null) return;
+            await Shell.Current.GoToAsync($"{nameof(RecipeDetailPage)}?recipeId={recipe.Id.Value}");
+        }
+
+        [RelayCommand]
+        public void ToggleFavourite(RecipeItem recipe)
         {
             if (recipe == null) return;
-            // pass id
-            await Shell.Current.GoToAsync($"recipedetail?recipeId={Uri.EscapeDataString(recipe.Id)}");
+
+            recipe.IsFavourite = !recipe.IsFavourite;
+
+            if (recipe.IsFavourite)
+            {
+                if (!Favourites.Contains(recipe))
+                    Favourites.Add(recipe);
+            }
+            else
+            {
+                if (Favourites.Contains(recipe))
+                    Favourites.Remove(recipe);
+            }
         }
     }
 }

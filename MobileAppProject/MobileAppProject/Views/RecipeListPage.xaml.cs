@@ -1,44 +1,52 @@
-using CommunityToolkit.Mvvm.ComponentModel;
 using MobileAppProject.Models;
 using MobileAppProject.Services;
 using MobileAppProject.ViewModels;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
+using MobileAppProject.Views;
 
-namespace MobileAppProject.Views;
-
-public partial class RecipeListPage : ContentPage
+namespace MobileAppProject.Views
 {
-    RecipeListViewModel ViewModel => BindingContext as RecipeListViewModel;
-    public RecipeListPage(RecipeListViewModel vm)
+    public partial class RecipeListPage : ContentPage
     {
-        InitializeComponent();
-        BindingContext = vm;
-    }
+        private RecipeListViewModel vm;
 
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-        _ = ViewModel.LoadRecipesAsync();
-    }
-
-    void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        var recipe = e.CurrentSelection.FirstOrDefault() as RecipeItem;
-        if (recipe != null)
+        public RecipeListPage()
         {
-            ViewModel.SelectRecipeCommand.Execute(recipe);
-            ((CollectionView)sender).SelectedItem = null;
+            InitializeComponent();
+
+            vm = new RecipeListViewModel(new MockRecipeService());
+            BindingContext = vm;
         }
-    }
 
-    private void OnToggleThemeClicked(object sender, EventArgs e)
-    {
-        var app = Application.Current;
-        if (app != null)
+        protected override void OnAppearing()
         {
-            var currentTheme = app.UserAppTheme;
-            app.UserAppTheme = currentTheme == AppTheme.Light ? AppTheme.Dark : AppTheme.Light;
+            base.OnAppearing();
+            _ = vm.LoadRecipesAsync();
+        }
+
+        void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var recipe = e.CurrentSelection.FirstOrDefault() as RecipeItem;
+            if (recipe != null)
+            {
+                vm.SelectRecipeCommand.Execute(recipe);
+                ((CollectionView)sender).SelectedItem = null;
+            }
+        }
+
+        private void OnToggleThemeClicked(object sender, EventArgs e)
+        {
+            var app = Application.Current;
+            if (app != null)
+            {
+                var currentTheme = app.UserAppTheme;
+                app.UserAppTheme = currentTheme == AppTheme.Light ? AppTheme.Dark : AppTheme.Light;
+            }
+        }
+
+        private async void OnViewFavouritesClicked(object sender, EventArgs e)
+        {
+            var page = new FavouritesPage(vm.Favourites);
+            await Navigation.PushAsync(page);
         }
     }
 }

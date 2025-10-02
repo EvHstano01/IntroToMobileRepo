@@ -6,12 +6,12 @@ namespace MobileAppProject.Views;
 
 public partial class FavouritesPage : ContentPage
 {
-    FavouritesPageViewModel ViewModel => BindingContext as FavouritesPageViewModel;
+    FavouritesViewModel ViewModel => BindingContext as FavouritesViewModel;
 
     public FavouritesPage(ObservableCollection<RecipeItem> favourites)
     {
         InitializeComponent();
-        BindingContext = new FavouritesPageViewModel(favourites);
+        BindingContext = new FavouritesViewModel(favourites);
     }
 
     private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)

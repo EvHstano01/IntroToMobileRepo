@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MobileAppProject.Models;
 using MobileAppProject.Services;
+using System.Threading.Tasks;
 
 namespace MobileAppProject.ViewModels
 {
@@ -10,37 +12,26 @@ namespace MobileAppProject.ViewModels
         private readonly IRecipeService _service;
 
         [ObservableProperty]
-        private int recipeId;
-
-        [ObservableProperty]
         private RecipeItem recipe;
 
         [ObservableProperty]
-        private bool isBusy;
+        private int recipeId;
 
         public RecipeDetailViewModel(IRecipeService service)
         {
             _service = service;
         }
 
-        // This method is called automatically when RecipeId changes due to the [QueryProperty] attribute
         partial void OnRecipeIdChanged(int value)
         {
-            _ = LoadRecipeAsync(value);
+            // Load the recipe when the RecipeId property is set
+            LoadRecipe(value);
         }
 
-        public async Task LoadRecipeAsync(int id)
+        private async void LoadRecipe(int id)
         {
-            if (IsBusy) return;
-            try
-            {
-                IsBusy = true;
-                Recipe = await _service.GetRecipeByIdAsync(id);
-            }
-            finally
-            {
-                IsBusy = false;
-            }
+            if (id <= 0) return;
+            Recipe = await _service.GetRecipeByIdAsync(id);
         }
     }
 }

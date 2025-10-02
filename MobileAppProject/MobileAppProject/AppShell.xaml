@@ -16,6 +16,5 @@
                     Value="{AppThemeBinding Light={StaticResource TextPrimary}, Dark={StaticResource White}}" />
         </Style>
     </Shell.Resources>
-    <ShellContent Title="Recipes" ContentTemplate="{DataTemplate views:RecipeListPage}" />
-
+    <ShellContent Title="Recipes" ContentTemplate="{DataTemplate views:RecipeListPage}"/>
 </Shell>

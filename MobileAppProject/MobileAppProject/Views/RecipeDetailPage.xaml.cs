@@ -5,6 +5,7 @@ namespace MobileAppProject.Views;
 public partial class RecipeDetailPage : ContentPage
 {
     public RecipeDetailViewModel? ViewModel => BindingContext as RecipeDetailViewModel;
+
     public RecipeDetailPage(RecipeDetailViewModel vm)
     {
         InitializeComponent();

@@ -48,5 +48,10 @@ namespace MobileAppProject.Views
             var page = new FavouritesPage(vm.Favourites);
             await Navigation.PushAsync(page);
         }
+
+        private void SearchEntry_Completed(object sender, EventArgs e)
+        {
+            vm?.SearchCommand.Execute(null);
+        }
     }
 }

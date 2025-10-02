@@ -5,12 +5,12 @@ using System.Collections.ObjectModel;
 
 namespace MobileAppProject.ViewModels;
 
-public partial class FavouritesPageViewModel : ObservableObject
+public partial class FavouritesViewModel : ObservableObject
 {
     [ObservableProperty]
     private ObservableCollection<RecipeItem> favourites;
 
-    public FavouritesPageViewModel(ObservableCollection<RecipeItem> favourites)
+    public FavouritesViewModel(ObservableCollection<RecipeItem> favourites)
     {
         Favourites = favourites;
     }

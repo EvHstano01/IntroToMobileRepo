@@ -18,23 +18,27 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-        builder.Services.AddSingleton<HttpClient>(serviceProvider =>
-        {
-            var httpClient = new HttpClient()
-            {
-                BaseAddress = new Uri("https://recipe-food-nutrition.p.rapidapi.com/"),
-                Timeout = TimeSpan.FromSeconds(30)
-            };
+        // builder.Services.AddSingleton<HttpClient>(serviceProvider =>
+        // {
+        //    var httpClient = new HttpClient()
+        //    {
+        //        BaseAddress = new Uri("https://recipe-food-nutrition.p.rapidapi.com/"),
+        //        Timeout = TimeSpan.FromSeconds(30)
+        //    };
 
-            httpClient.DefaultRequestHeaders.Add("User-Agent",
-                $"MyRecipeApp/1.0 ({DeviceInfo.Platform} {DeviceInfo.VersionString})");
+        //    httpClient.DefaultRequestHeaders.Add("User-Agent",
+        //        $"MyRecipeApp/1.0 ({DeviceInfo.Platform} {DeviceInfo.VersionString})");
 
-            return httpClient;
-        });
+        //    return httpClient;
+        //});
+        builder.Services.AddSingleton<IRecipeService, MockRecipeService>();
         builder.Services.AddTransient<RecipeListPage>();
         builder.Services.AddTransient<RecipeDetailPage>();
         builder.Services.AddTransient<FavouritesPage>();
-		builder.Services.AddSingleton<SpoonacularAPIService>();
+        builder.Services.AddTransient<RecipeDetailViewModel>();
+        builder.Services.AddTransient<RecipeListViewModel>();
+        builder.Services.AddTransient<FavouritesViewModel>();
+        // builder.Services.AddSingleton<SpoonacularAPIService>();
 
 #if DEBUG
         builder.Logging.AddDebug();

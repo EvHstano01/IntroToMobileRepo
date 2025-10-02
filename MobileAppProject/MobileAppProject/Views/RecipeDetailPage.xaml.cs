@@ -16,14 +16,4 @@ public partial class RecipeDetailPage : ContentPage
     {
         Navigation.PopAsync();
     }
-
-    private void OnToggleThemeClicked(object sender, EventArgs e)
-    {
-        var app = Application.Current;
-        if (app != null)
-        {
-            var currentTheme = app.UserAppTheme;
-            app.UserAppTheme = currentTheme == AppTheme.Light ? AppTheme.Dark : AppTheme.Light;
-        }
-    }
 }

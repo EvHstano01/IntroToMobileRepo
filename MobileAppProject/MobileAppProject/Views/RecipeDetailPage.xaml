@@ -21,11 +21,6 @@
                         <TapGestureRecognizer Tapped="OnBackClicked"/>
                     </Label.GestureRecognizers>
                 </Label>
-                <Button Text="Toggle Theme"
-                    Clicked="OnToggleThemeClicked"
-                    VerticalOptions="Center"
-                    HorizontalOptions="End"
-                    Grid.Column="1"/>
             </Grid>
 
             <Image Source="{Binding Recipe.ImageFile}" Aspect="AspectFill" HeightRequest="200"/>

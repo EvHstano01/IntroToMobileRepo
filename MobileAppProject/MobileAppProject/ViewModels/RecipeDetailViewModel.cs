@@ -24,7 +24,6 @@ namespace MobileAppProject.ViewModels
 
         partial void OnRecipeIdChanged(int value)
         {
-            // Load the recipe when the RecipeId property is set
             LoadRecipe(value);
         }
 

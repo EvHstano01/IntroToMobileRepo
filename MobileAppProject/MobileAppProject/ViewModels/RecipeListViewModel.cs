@@ -44,7 +44,6 @@ namespace MobileAppProject.ViewModels
                 IsBusy = true;
                 var items = await _service.GetAllRecipesAsync();
 
-                // make sure we have a list to filter from
                 _allRecipes = items?.ToList() ?? new List<RecipeItem>();
                 Recipes = new ObservableCollection<RecipeItem>(_allRecipes);
             }
